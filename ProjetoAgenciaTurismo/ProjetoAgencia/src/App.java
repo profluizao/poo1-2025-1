@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import dominio.pessoa.fisica.Colaborador;
-
 public class App {
     public static void main(String[] args) throws Exception {
         //List<Colaborador> grupo = new ArrayList<>();
