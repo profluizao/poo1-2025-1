@@ -1,18 +1,16 @@
 import java.util.ArrayList;
 
 import dominio.pessoa.Passageiro;
-import fakedb.PassageiroFakeDB;
+import repositorio.PassageiroRepo;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        PassageiroFakeDB fakeDB = new PassageiroFakeDB();
-        ArrayList<Passageiro> lista = fakeDB.getInstancia();
-        for (Passageiro item : lista) {
-            System.out.println("Codigo: " + item.getCodigo());
-            System.out.println("Nome: " + item.getNome());
-            System.out.println("CPF: " + item.getDocumentoPessoal());
-            System.out.println("----------------------------------");
+        PassageiroRepo repo = new PassageiroRepo();
+        ArrayList<Passageiro> lista = repo.read();
+        for (Passageiro passageiro : lista) {
+            System.out.println("Codigo: " + passageiro.getCodigo());
+            System.out.println("Nome: " + passageiro.getNome());
+            System.out.println("Telefone: " + passageiro.getTelefone());
         }
     }
 }
