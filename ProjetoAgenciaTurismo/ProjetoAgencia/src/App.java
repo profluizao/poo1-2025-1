@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
 import dominio.pessoa.Passageiro;
-import repositorio.PassageiroRepo;
+import servico.PassageiroServico;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        PassageiroRepo repo = new PassageiroRepo();
-        ArrayList<Passageiro> lista = repo.read();
+        PassageiroServico serv = new PassageiroServico();
+        ArrayList<Passageiro> lista = serv.navegar();
         for (Passageiro passageiro : lista) {
             System.out.println("Codigo: " + passageiro.getCodigo());
             System.out.println("Nome: " + passageiro.getNome());
