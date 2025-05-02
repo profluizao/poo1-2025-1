@@ -2,10 +2,14 @@ package visao;
 
 import java.util.Scanner;
 
-public class padraoMenu extends BaseMenu{
+public class PadraoMenu extends BaseMenu{
+
+    public PadraoMenu(Scanner sc){
+        super(sc);
+    }
 
     @Override
-    public int executar(Scanner scan) {
+    public int executar() {
         int opcao = 0;
         while (opcao != 9){
             System.out.println("1 - Listar");

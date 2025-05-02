@@ -10,42 +10,22 @@ public class PassageiroVisao extends BaseVisao{
 
     private PassageiroServico serv;
 
-    public PassageiroVisao(){
+    public PassageiroVisao(Scanner sc){
+        super(sc);
         this.serv = new PassageiroServico();
     }
 
     @Override
     public void carregar() {
-        padraoMenu menu = new padraoMenu();
-        Scanner sc = new Scanner(System.in);
-        while (true){
-            int op = menu.executar(sc);
-            switch (op) {
-                case 1:
-                    this.listar();                    
-                    break;
-                case 2:
-                    this.exibir();
-                    break;
-                case 3:
-                    this.incluir();
-                    break;
-                case 4:
-                    this.alterar();
-                    break;
-                case 5:
-                    this.excluir();
-                    break;
-                case 9:
-                    return;
-            }
-        }        
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     protected void listar() {
-        System.out.println("*************************************");
-        System.out.println("* PASSAGEIRO - LISTAR ***************");
+        Util.limparTela();
+        System.out.println("***************************************************");
+        System.out.println("** PASSAGEIRO - LISTAR ****************************");
         ArrayList<Passageiro> lista = this.serv.navegar();
         for (Passageiro ps : lista) {
             System.out.println("*************************************");
@@ -53,27 +33,122 @@ public class PassageiroVisao extends BaseVisao{
             System.out.println("Nome: " + ps.getNome());
             System.out.println("E-mail: " + ps.getEmail());
         }
-        System.out.println("*************************************");
+        System.out.println("***************************************************");
+        Util.pausar();
     }
 
     @Override
     protected void exibir() {
-        System.out.println("Vc escolheu Exibir.");
+        Util.limparTela();
+        System.out.println("***************************************************");
+        System.out.println("** PASSAGEIRO - EXIBIR ***************************");
+
+        System.out.print("Digite o código do passageiro: ");
+        Long codigo = this.scan.nextLong();
+        
+        Passageiro psbusca = this.serv.ler(codigo);
+        if (psbusca == null){
+            System.out.print("ERRO - Passageiro não consta da lista.");
+            return;
+        }
+        else{
+            System.out.println("***************************************************");
+            System.out.println("Codigo: " + psbusca.getCodigo());
+            System.out.println("Nome: " + psbusca.getNome());
+            System.out.println("E-mail: " + psbusca.getEmail());
+        }
+        System.out.println("***************************************************");
+        Util.pausar();
     }
 
     @Override
     protected void incluir() {
-        System.out.println("Vc escolheu Incluir.");
+        Util.limparTela();
+        System.out.println("***************************************************");
+        System.out.println("** PASSAGEIRO - INCLUIR ***************************");
 
+        System.out.print("Digite o nome do passageiro: ");
+        String nome = this.scan.next();
+        this.scan.nextLine();
+
+        System.out.print("Digite o email do passageiro: ");
+        String email = this.scan.nextLine();
+
+        Passageiro ps = new Passageiro(0, null, null, nome, null, email, null, null);
+        Passageiro novops = this.serv.adicionar(ps);
+
+        System.out.println("Passageiro adicionado com o código: [" + novops.getCodigo() + "]");
+        System.out.println("***************************************************");
+        Util.pausar();
     }
 
     @Override
     protected void alterar() {
-        System.out.println("Vc escolheu Alterar.");
+        Util.limparTela();
+        System.out.println("***************************************************");
+        System.out.println("** PASSAGEIRO - ALTERAR ***************************");
+        System.out.print("Digite o código do passageiro: ");
+        Long codigo = this.scan.nextLong();
+        
+        Passageiro psbusca = this.serv.ler(codigo);
+        if (psbusca == null){
+            System.out.print("ERRO - Passageiro não consta da lista.");
+            return;
+        }
+        else{
+            System.out.println("***************************************************");
+            System.out.println("Passageiro localizado:");
+            System.out.println("Codigo: " + psbusca.getCodigo());
+            System.out.println("Nome: " + psbusca.getNome());
+            System.out.println("E-mail: " + psbusca.getEmail());
+
+            System.out.println("***************************************************");
+            System.out.print("Digite o nome do passageiro: ");
+            String nome = this.scan.next();
+            this.scan.nextLine();
+    
+            System.out.print("Digite o email do passageiro: ");
+            String email = this.scan.nextLine();
+
+            psbusca.setNome(nome);
+            psbusca.setEmail(email);
+
+            System.out.println("***************************************************");
+            System.out.println("Dados alterados:");
+            System.out.println("Codigo: " + psbusca.getCodigo());
+            System.out.println("Nome: " + psbusca.getNome());
+            System.out.println("E-mail: " + psbusca.getEmail());              
+        }
+        System.out.println("***************************************************");
+        Util.pausar();
     }
 
     @Override
     protected void excluir() {
-        System.out.println("Vc escolheu Excluir.");
+        Util.limparTela();
+        System.out.println("***************************************************");
+        System.out.println("** PASSAGEIRO - EXCLUIR ***************************");
+
+        System.out.print("Digite o código do passageiro: ");
+        Long codigo = this.scan.nextLong();
+        
+        Passageiro psbusca = this.serv.ler(codigo);
+        if (psbusca == null){
+            System.out.print("ERRO - Passageiro não consta da lista.");
+            return;
+        }
+        else{
+            System.out.println("***************************************************");
+            System.out.println("Passageiro localizado:");
+            System.out.println("Codigo: " + psbusca.getCodigo());
+            System.out.println("Nome: " + psbusca.getNome());
+            System.out.println("E-mail: " + psbusca.getEmail());
+
+            System.out.println("***************************************************");
+            this.serv.deletar(codigo);
+            System.out.println("Passageiro removido da lista.");
+        }
+        System.out.println("***************************************************");
+        Util.pausar();
     }
 }

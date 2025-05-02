@@ -3,14 +3,18 @@ package visao;
 import java.util.Scanner;
 
 public class ColaboradorMenu extends BaseMenu {
+
     private ColaboradorVisao visao;
 
-    public ColaboradorMenu(){
-        this.visao = new ColaboradorVisao();
+    private Scanner scan;
+
+    public ColaboradorMenu(Scanner sc){
+        super(sc);
+        this.visao = new ColaboradorVisao(sc);
     }
 
     @Override
-    public int executar(Scanner scan) {
+    public int executar() {
         int opcao = 0;
         while (opcao != 9){
             System.out.println("1 - Listar");
@@ -19,7 +23,7 @@ public class ColaboradorMenu extends BaseMenu {
             System.out.println("4 - Alterar");
             System.out.println("5 - Excluir");
             System.out.println("9 - Sair");
-            opcao = scan.nextInt();
+            opcao = this.scan.nextInt();
             switch (opcao) {
                 case 1:
                     this.visao.listar();

@@ -1,6 +1,9 @@
 package visao;
 
-public abstract class BaseVisao {
+import java.util.Scanner;
+
+public abstract class BaseVisao extends BaseUtil{
+
     protected abstract void listar();
     protected abstract void exibir();
     protected abstract void incluir();
@@ -8,4 +11,8 @@ public abstract class BaseVisao {
     protected abstract void excluir();
 
     public abstract void carregar();
+
+    public BaseVisao(Scanner sc){
+        super(sc);
+    }
 }

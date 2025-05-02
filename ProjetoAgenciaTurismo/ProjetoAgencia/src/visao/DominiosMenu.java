@@ -2,13 +2,18 @@ package visao;
 
 import java.util.Scanner;
 
-public class dominiosMenu extends BaseMenu{
+public class DominiosMenu extends BaseMenu{
 
     private PassageiroMenu passageiroMenu;
+
     private ColaboradorMenu colaboradorMenu;
 
+    public DominiosMenu(Scanner sc){
+        super(sc);
+    }
+
     @Override
-    public int executar(Scanner scan) {
+    public int executar() {
         int opcao = 0;
         while (opcao != 9){
             System.out.println("1 - Passageiro");
@@ -20,12 +25,12 @@ public class dominiosMenu extends BaseMenu{
             opcao = scan.nextInt();
             switch (opcao) {
                 case 1:
-                    this.passageiroMenu = new PassageiroMenu();
-                    this.passageiroMenu.executar(scan);
+                    this.passageiroMenu = new PassageiroMenu(this.scan);
+                    this.passageiroMenu.executar();
                     break;
                 case 2:
-                    this.colaboradorMenu = new ColaboradorMenu();
-                    this.colaboradorMenu.executar(scan);
+                    this.colaboradorMenu = new ColaboradorMenu(this.scan);
+                    this.colaboradorMenu.executar();
                     break;
                 // case 3:
                 // case 4:
